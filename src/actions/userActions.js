@@ -1,12 +1,12 @@
 import axios from 'axios';
+import { GET_USERS } from '../types/userTypes';
 
-export const traerTodos = () => async (dispatch) => {
-  const respuesta = await axios.get(
+export const getUsers = () => async (dispatch) => {
+  const response = await axios.get(
     'https://jsonplaceholder.typicode.com/users'
   );
-
   dispatch({
-    type: 'TRAER_USUARIOS',
-    payload: respuesta.data,
+    type: GET_USERS,
+    payload: response.data,
   });
 };

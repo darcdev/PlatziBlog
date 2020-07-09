@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import * as userActions from '../../actions/userActions';
 class Usuarios extends Component {
   componentDidMount() {
-    this.props.traerTodos();
+    this.props.getUsers();
   }
   ponerFilas = () =>
-    this.props.usuarios.map((usuario) => (
+    this.props.users.map((usuario) => (
       <tr key={usuario.id}>
         <td>{usuario.name}</td>
         <td>{usuario.email}</td>
