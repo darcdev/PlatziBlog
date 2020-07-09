@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../../actions/userActions';
+import Spinner from '../General/Spinner';
 class Usuarios extends Component {
   componentDidMount() {
     this.props.getUsers();
   }
-  ponerFilas = () =>
+  putRows = () =>
     this.props.users.map((usuario) => (
       <tr key={usuario.id}>
         <td>{usuario.name}</td>
@@ -13,8 +14,10 @@ class Usuarios extends Component {
         <td>{usuario.website}</td>
       </tr>
     ));
-
-  render() {
+  putContent = () => {
+    if (this.props.loading) {
+      return <Spinner />;
+    }
     return (
       <div>
         <table className='tabla'>
@@ -25,10 +28,13 @@ class Usuarios extends Component {
               <th>Enlace</th>
             </tr>
           </thead>
-          <tbody>{this.ponerFilas()}</tbody>
+          <tbody>{this.putRows()}</tbody>
         </table>
       </div>
     );
+  };
+  render() {
+    return <div>{this.putContent()}</div>;
   }
 }
 

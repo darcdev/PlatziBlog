@@ -1,7 +1,9 @@
-import { GET_USERS } from '../types/userTypes';
+import { GET_USERS, LOADING, ERROR } from '../types/userTypes';
 
 const INITIALSTATE = {
   users: [],
+  loading: false,
+  error: false,
 };
 
 export default (state = INITIALSTATE, action) => {
@@ -10,7 +12,14 @@ export default (state = INITIALSTATE, action) => {
       return {
         ...state,
         users: action.payload,
+        loading: false,
       };
+    case LOADING: {
+      return { ...state, loading: true };
+    }
+    case ERROR: {
+      return { ...state, error: action.payload, loading: false };
+    }
     default:
       return state;
   }
