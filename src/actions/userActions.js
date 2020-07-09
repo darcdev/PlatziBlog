@@ -7,7 +7,7 @@ export const getUsers = () => async (dispatch) => {
   });
   try {
     const response = await axios.get(
-      'https://jsonplaceholder.typicode.com/users'
+      'https://jsonplaceholder.typicode.com/userss'
     );
     dispatch({
       type: GET_USERS,
@@ -17,7 +17,7 @@ export const getUsers = () => async (dispatch) => {
     console.log('Error:', err.message);
     dispatch({
       type: ERROR,
-      payload: err.message,
+      payload: 'Ha ocurrido un error , intentelo de nuevo',
     });
   }
 };
