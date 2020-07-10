@@ -6,6 +6,7 @@ import {
   ERROR,
   COM_LOADING,
   COM_ERROR,
+  COM_UPDATE,
 } from '../types/publicationTypes';
 
 import { GET_USERS } from '../types/userTypes';
@@ -112,7 +113,7 @@ export const getComments = (pub_key, com_key) => async (dispatch, getState) => {
     update_publications[pub_key][com_key] = updated;
 
     dispatch({
-      type: GET_BY_USER,
+      type: COM_UPDATE,
       payload: update_publications,
     });
   } catch (error) {

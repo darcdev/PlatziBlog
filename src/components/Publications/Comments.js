@@ -5,11 +5,11 @@ import Spinner from '../General/Spinner';
 import Fatal from '../General/Fatal';
 
 const Comments = (props) => {
-  if (props.loading) {
-    return <Spinner />;
-  }
   if (props.error) {
-    return <Fatal message={props.error} />;
+    return <Fatal message={props.com_error} />;
+  }
+  if (props.com_loading && !props.comments.length) {
+    return <Spinner />;
   }
   const putComments = () => {
     return props.comments.map((comment) => {
