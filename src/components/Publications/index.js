@@ -4,12 +4,11 @@ import * as userActions from '../../actions/userActions';
 import * as publicationsActions from '../../actions/publicationsActions';
 
 class Publications extends Component {
-  componentDidMount() {
-    this.props.getPublications();
-
+  async componentDidMount() {
     if (!this.props.userReducer.users.length) {
-      this.props.getUsers();
+      await this.props.getUsers();
     }
+    this.props.getPublicationsByUser(this.props.match.params.key);
   }
   render() {
     console.log(this.props);
