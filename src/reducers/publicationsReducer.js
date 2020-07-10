@@ -3,12 +3,16 @@ import {
   LOADING,
   ERROR,
   GET_BY_USER,
+  COM_ERROR,
+  COM_LOADING,
 } from '../types/publicationTypes';
 
 const INITIALSTATE = {
   publications: [],
   loading: false,
   error: '',
+  comm_error: '',
+  com_loading: '',
 };
 
 export default (state = INITIALSTATE, action) => {
@@ -30,6 +34,12 @@ export default (state = INITIALSTATE, action) => {
         error: '',
       };
     case LOADING: {
+      return { ...state, loading: true };
+    }
+    case COM_ERROR: {
+      return { ...state, error: action.payload, loading: false };
+    }
+    case COM_LOADING: {
       return { ...state, loading: true };
     }
     case ERROR: {

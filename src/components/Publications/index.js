@@ -80,7 +80,9 @@ class Publications extends Component {
       >
         <h2>{publication.title}</h2>
         <h3>{publication.body}</h3>
-        <div>{publication.open ? <Comments /> : ''}</div>
+        <div>
+          {publication.open ? <Comments comments={publication.comments} /> : ''}
+        </div>
       </div>
     ));
 

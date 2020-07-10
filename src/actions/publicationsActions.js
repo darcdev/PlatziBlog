@@ -4,6 +4,8 @@ import {
   GET_BY_USER,
   LOADING,
   ERROR,
+  COM_LOADING,
+  COM_ERROR,
 } from '../types/publicationTypes';
 
 import { GET_USERS } from '../types/userTypes';
@@ -90,23 +92,33 @@ export const openClose = (pub_key, com_key) => (dispatch, getState) => {
 };
 
 export const getComments = (pub_key, com_key) => async (dispatch, getState) => {
+  dispatch({
+    type: COM_LOADING,
+  });
   const { publications } = getState().publicationsReducer;
   const select = publications[pub_key][com_key];
 
-  const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/comments?postId=${select.id}`
-  );
-  const updated = {
-    ...select,
-    comments: response.data,
-  };
+  try {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/comments?postId=${select.id}`
+    );
+    const updated = {
+      ...select,
+      comments: response.data,
+    };
 
-  const update_publications = [...publications];
-  update_publications[pub_key] = [...publications[pub_key]];
-  update_publications[pub_key][com_key] = updated;
+    const update_publications = [...publications];
+    update_publications[pub_key] = [...publications[pub_key]];
+    update_publications[pub_key][com_key] = updated;
 
-  dispatch({
-    type: GET_BY_USER,
-    payload: update_publications,
-  });
+    dispatch({
+      type: GET_BY_USER,
+      payload: update_publications,
+    });
+  } catch (error) {
+    dispatch({
+      type: COM_ERROR,
+      payload: 'No se pudieron obtener los comentarios de esta publicacion',
+    });
+  }
 };
