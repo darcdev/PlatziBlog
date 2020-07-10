@@ -88,3 +88,25 @@ export const openClose = (pub_key, com_key) => (dispatch, getState) => {
     payload: update_publications,
   });
 };
+
+export const getComments = (pub_key, com_key) => async (dispatch, getState) => {
+  const { publications } = getState().publicationsReducer;
+  const select = publications[pub_key][com_key];
+
+  const response = await axios.get(
+    `https://jsonplaceholder.typicode.com/comments?postId=${select.id}`
+  );
+  const updated = {
+    ...select,
+    comments: response.data,
+  };
+
+  const update_publications = [...publications];
+  update_publications[pub_key] = [...publications[pub_key]];
+  update_publications[pub_key][com_key] = updated;
+
+  dispatch({
+    type: GET_BY_USER,
+    payload: update_publications,
+  });
+};

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../General/Spinner';
 import Fatal from '../General/Fatal';
+import Comments from './Comments';
 
 import { connect } from 'react-redux';
 import * as userActions from '../../actions/userActions';
@@ -73,14 +74,22 @@ class Publications extends Component {
       <div
         key={publication.id}
         className='pub_titulo'
-        onClick={() => this.props.openClose(pub_key, com_key)}
+        onClick={() =>
+          this.showComments(pub_key, com_key, publication.comments)
+        }
       >
         <h2>{publication.title}</h2>
         <h3>{publication.body}</h3>
-        <div>{publication.open ? 'opened' : 'closed'}</div>
+        <div>{publication.open ? <Comments /> : ''}</div>
       </div>
     ));
 
+  showComments = (pub_key, com_key, comments) => {
+    this.props.openClose(pub_key, com_key);
+    if (!comments.length) {
+      this.props.getComments(pub_key, com_key);
+    }
+  };
   render() {
     return (
       <div>
