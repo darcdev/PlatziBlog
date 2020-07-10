@@ -1,4 +1,9 @@
-import { GET_PUBLICATIONS, LOADING, ERROR } from '../types/publicationTypes';
+import {
+  GET_PUBLICATIONS,
+  LOADING,
+  ERROR,
+  GET_BY_USER,
+} from '../types/publicationTypes';
 
 const INITIALSTATE = {
   publications: [],
@@ -9,6 +14,13 @@ const INITIALSTATE = {
 export default (state = INITIALSTATE, action) => {
   switch (action.type) {
     case GET_PUBLICATIONS:
+      return {
+        ...state,
+        publications: action.payload,
+        loading: false,
+        error: '',
+      };
+    case GET_BY_USER:
       return {
         ...state,
         publications: action.payload,

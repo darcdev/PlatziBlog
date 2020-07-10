@@ -6,7 +6,9 @@ import Fatal from '../General/Fatal';
 import UsersTable from './UsersTable';
 class Usuarios extends Component {
   componentDidMount() {
-    this.props.getUsers();
+    if (!this.props.users.length) {
+      this.props.getUsers();
+    }
   }
   putContent = () => {
     if (this.props.loading) {
