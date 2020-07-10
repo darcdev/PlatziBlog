@@ -19,7 +19,7 @@ class Publications extends Component {
       await getUsers();
     }
     if (!('publications_key' in this.props.userReducer.users[key])) {
-      getPublicationsByUser(key);
+      await getPublicationsByUser(key);
     }
   }
 
@@ -41,11 +41,52 @@ class Publications extends Component {
 
     return <h1>Publicaciones de {nombre}</h1>;
   };
+
+  putPublications = () => {
+    const {
+      userReducer,
+      userReducer: { users },
+      publicationsReducer,
+      publicationsReducer: { publications },
+      match: {
+        params: { key },
+      },
+    } = this.props;
+
+    if (!users.length) return;
+    if (userReducer.error) return;
+    if (publicationsReducer.loading) {
+      return <Spinner />;
+    }
+    if (publicationsReducer.error) {
+      return <Fatal mensaje={publicationsReducer.error} />;
+    }
+    if (!publications.length) return;
+    if (!('publications_key' in users[key])) return;
+
+    const { publications_key } = users[key];
+    return this.showInfo(publications[publications_key], publications_key);
+  };
+
+  showInfo = (publications, pub_key) =>
+    publications.map((publication, com_key) => (
+      <div
+        key={publication.id}
+        className='pub_titulo'
+        onClick={() => this.props.openClose(pub_key, com_key)}
+      >
+        <h2>{publication.title}</h2>
+        <h3>{publication.body}</h3>
+        <div>{publication.open ? 'opened' : 'closed'}</div>
+      </div>
+    ));
+
   render() {
     return (
       <div>
         {this.putUser()}
         {this.props.match.params.key}
+        {this.putPublications()}
       </div>
     );
   }

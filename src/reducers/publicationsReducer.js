@@ -12,6 +12,8 @@ const INITIALSTATE = {
 };
 
 export default (state = INITIALSTATE, action) => {
+  console.log(action.payload);
+
   switch (action.type) {
     case GET_PUBLICATIONS:
       return {
