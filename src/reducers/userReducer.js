@@ -3,7 +3,7 @@ import { GET_USERS, LOADING, ERROR } from '../types/userTypes';
 const INITIALSTATE = {
   users: [],
   loading: false,
-  error: false,
+  error: '',
 };
 
 export default (state = INITIALSTATE, action) => {

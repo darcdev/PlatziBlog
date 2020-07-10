@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Menu from './Menu';
 import Usuarios from './Users';
-import Publications from './publications';
+import Publications from './Publications';
 
 const App = (props) => (
   <BrowserRouter>
