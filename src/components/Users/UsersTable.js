@@ -1,13 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import '../../styles/icons.css';
 
 const UsersTable = (props) => {
   const putRows = () =>
-    props.users.map((usuario) => (
-      <tr key={usuario.id}>
-        <td>{usuario.name}</td>
-        <td>{usuario.email}</td>
-        <td>{usuario.website}</td>
+    props.users.map((user, key) => (
+      <tr key={user.id}>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
+        <td>{user.website}</td>
+        <td>
+          <Link to={`/publicaciones/${key}`}>
+            <div class='eye-solid icon'></div>
+          </Link>
+        </td>
       </tr>
     ));
 

@@ -18,10 +18,14 @@ class Usuarios extends Component {
     return <UsersTable />;
   };
   render() {
-    return <div>{this.putContent()}</div>;
+    return (
+      <div>
+        <h1 className='center'>Usuarios</h1>
+        {this.putContent()}
+      </div>
+    );
   }
 }
-
 const mapStateToProps = (state) => {
   return state.userReducer;
 };
