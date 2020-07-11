@@ -5,7 +5,7 @@ import Spinner from '../General/Spinner';
 import Fatal from '../General/Fatal';
 
 const Comments = (props) => {
-  if (props.error) {
+  if (props.com_error) {
     return <Fatal message={props.com_error} />;
   }
   if (props.com_loading && !props.comments.length) {
@@ -24,7 +24,11 @@ const Comments = (props) => {
       );
     });
   };
-  return <ul>{putComments()}</ul>;
+  return (
+    <div>
+      Comments<ul>{putComments()}</ul>
+    </div>
+  );
 };
 
 const mapStateToProps = ({ publicationsReducer }) => publicationsReducer;

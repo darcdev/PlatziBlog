@@ -38,3 +38,9 @@ body {
 .pub_titulo {
   border-bottom: 1px solid black;
 }
+
+.homeworks_container {
+  font-size: 20px;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}

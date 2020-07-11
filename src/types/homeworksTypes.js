@@ -1,0 +1,3 @@
+export const GET_HOMEWORKS = 'GET_HOMEWORKS';
+export const LOADING = 'HOMEWORKS_LOADING';
+export const ERROR = 'HOMEWORKS_ERROR';
