@@ -10,6 +10,11 @@ class Homeworks extends Component {
       this.props.getHomeworks();
     }
   }
+  componentDidUpdate() {
+    if (!Object.keys(this.props.homeworks).length) {
+      this.props.getHomeworks();
+    }
+  }
   showContent = () => {
     const { homeworks, loading, error } = this.props;
     if (loading) {
@@ -27,18 +32,24 @@ class Homeworks extends Component {
     ));
   };
   putHomeworks = (user_id) => {
-    const { homeworks , changeCheck } = this.props;
+    const { homeworks, changeCheck, remove } = this.props;
     const by_user = {
       ...homeworks[user_id],
     };
     return Object.keys(by_user).map((tar_id) => (
       <div key={tar_id}>
-        <input type='checkbox' defaultChecked={by_user[tar_id].completed} onChange={() => changeCheck(user_id  ,tar_id))} />
+        <input
+          type='checkbox'
+          defaultChecked={by_user[tar_id].completed}
+          onChange={() => changeCheck(user_id, tar_id)}
+        />
         {by_user[tar_id].title}
         <button className='m_left'>
           <Link to={`/tareas/guardar/${user_id}/${tar_id}`}>Editar </Link>
         </button>
-        <button className='m_left'>Eliminar</button>
+        <button className='m_left' onClick={() => remove(tar_id)}>
+          Eliminar
+        </button>
       </div>
     ));
   };

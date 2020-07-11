@@ -113,3 +113,24 @@ export const changeCheck = (user_id, tar_id) => (dispatch, getState) => {
     payload: update,
   });
 };
+
+export const remove = (tar_id) => async (dispatch, getState) => {
+  dispatch({
+    type: LOADING,
+  });
+  try {
+    const response = await axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${tar_id}`
+    );
+
+    dispatch({
+      type: GET_HOMEWORKS,
+      payload: {},
+    });
+  } catch (err) {
+    dispatch({
+      type: ERROR,
+      payload: 'servicio no disponible',
+    });
+  }
+};
