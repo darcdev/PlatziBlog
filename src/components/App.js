@@ -4,6 +4,7 @@ import Menu from './Menu';
 import Usuarios from './Users';
 import Publications from './Publications';
 import Homeworks from './Homeworks';
+import SaveHomework from './Homeworks/Save';
 
 const App = (props) => (
   <BrowserRouter>
@@ -12,6 +13,7 @@ const App = (props) => (
       <Route exact path='/' component={Usuarios} />
       <Route exact path='/publicaciones/:key' component={Publications} />
       <Route exact path='/tareas' component={Homeworks} />
+      <Route exact path='/tareas/guardar' component={SaveHomework} />
     </div>
   </BrowserRouter>
 );

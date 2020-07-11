@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../General/Spinner';
 import Fatal from '../General/Fatal';
 import * as homeworksActions from '../../actions/homeworksActions';
-
 class Homeworks extends Component {
   componentDidMount() {
     console.log(this.props.getHomeworks());
@@ -38,7 +38,14 @@ class Homeworks extends Component {
   };
   render() {
     console.log(this.props);
-    return <div>{this.showContent()}</div>;
+    return (
+      <div>
+        <button>
+          <Link to='/tareas/guardar'>Agregar</Link>
+        </button>
+        {this.showContent()}
+      </div>
+    );
   }
 }
 
