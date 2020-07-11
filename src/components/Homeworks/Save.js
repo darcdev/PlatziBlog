@@ -5,6 +5,21 @@ import * as homeworksActions from '../../actions/homeworksActions';
 import Spinner from '../General/Spinner';
 import Fatal from '../General/Fatal';
 class Save extends Component {
+  componentDidMount() {
+    const {
+      match: {
+        params: { userId, tar_id },
+      },
+      homeworks,
+      changeUserId,
+      changeTitle,
+    } = this.props;
+    if (userId && tar_id) {
+      const homework = homeworks[userId][tar_id];
+      changeUserId(homework.userId);
+      changeTitle(homework.title);
+    }
+  }
   changeUserId = (event) => {
     this.props.changeUserId(event.target.value);
   };
@@ -12,14 +27,32 @@ class Save extends Component {
     this.props.changeTitle(event.target.value);
   };
   save = () => {
-    const { user_id, title, addHomework } = this.props;
+    const {
+      match: {
+        params: { userId, tar_id },
+      },
+      homeworks,
+      user_id,
+      title,
+      addHomework,
+      edit,
+    } = this.props;
     const newHomework = {
       userId: user_id,
       title,
       completed: false,
     };
-
-    addHomework(newHomework);
+    if (userId && tar_id) {
+      const homework = homeworks[userId][tar_id];
+      const editHomework = {
+        ...newHomework,
+        completed: homework.completed,
+        id: homework.id,
+      };
+      edit(editHomework);
+    } else {
+      addHomework(newHomework);
+    }
   };
   disabled = () => {
     const { title, user_id, loading } = this.props;
@@ -43,6 +76,7 @@ class Save extends Component {
   render() {
     return (
       <div>
+        {this.props.back ? <Redirect to='/tareas/' /> : ''}
         <h1>Guardar Tarea</h1>
         Usuario id :
         <input

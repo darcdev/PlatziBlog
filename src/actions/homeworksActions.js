@@ -6,6 +6,7 @@ import {
   CHANGE_USER_ID,
   CHANGE_TITLE,
   HOMEWORK_ADDED,
+  UPDATE,
 } from '../types/homeworksTypes';
 
 export const getHomeworks = () => async (dispatch) => {
@@ -72,4 +73,43 @@ export const addHomework = (newHomework) => async (dispatch) => {
       payload: 'lo sentimos no se pudo agregar la tarea',
     });
   }
+};
+export const edit = (editHomework) => async (dispatch) => {
+  dispatch({
+    type: LOADING,
+  });
+  try {
+    const response = await axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${editHomework.id}`,
+      editHomework
+    );
+    console.log(response.data);
+    dispatch({
+      type: HOMEWORK_ADDED,
+    });
+  } catch (err) {
+    dispatch({
+      type: ERROR,
+      payload: 'lo sentimos no se pudo agregar la tarea',
+    });
+  }
+};
+
+export const changeCheck = (user_id, tar_id) => (dispatch, getState) => {
+  const { homeworks } = getState().homeworksReducer;
+  const selected = homeworks[user_id][tar_id];
+  const update = {
+    ...homeworks,
+  };
+  update[user_id] = {
+    ...homeworks[user_id],
+  };
+  update[user_id][tar_id] = {
+    ...homeworks[user_id][tar_id],
+    completed: !selected.completed,
+  };
+  dispatch({
+    type: UPDATE,
+    payload: update,
+  });
 };

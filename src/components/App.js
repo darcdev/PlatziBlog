@@ -14,6 +14,11 @@ const App = (props) => (
       <Route exact path='/publicaciones/:key' component={Publications} />
       <Route exact path='/tareas' component={Homeworks} />
       <Route exact path='/tareas/guardar' component={SaveHomework} />
+      <Route
+        exact
+        path='/tareas/guardar/:userId/:tar_id'
+        component={SaveHomework}
+      />
     </div>
   </BrowserRouter>
 );

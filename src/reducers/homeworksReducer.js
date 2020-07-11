@@ -5,6 +5,7 @@ import {
   CHANGE_USER_ID,
   CHANGE_TITLE,
   HOMEWORK_ADDED,
+  UPDATE,
 } from '../types/homeworksTypes';
 
 const INITIALSTATE = {
@@ -13,6 +14,7 @@ const INITIALSTATE = {
   error: '',
   user_id: '',
   title: '',
+  back: false,
 };
 
 export default (state = INITIALSTATE, action) => {
@@ -23,6 +25,7 @@ export default (state = INITIALSTATE, action) => {
         homeworks: action.payload,
         loading: false,
         error: '',
+        back: false,
       };
     case LOADING: {
       return { ...state, loading: true };
@@ -41,7 +44,9 @@ export default (state = INITIALSTATE, action) => {
         title: action.payload,
       };
     case HOMEWORK_ADDED:
-      return { state, homeworks: {}, loading: false, error: '' };
+      return { state, homeworks: {}, loading: false, error: '', back: true };
+    case UPDATE:
+      return { state, homeworks: action.payload };
     default:
       return state;
   }
