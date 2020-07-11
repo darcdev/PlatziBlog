@@ -11,8 +11,10 @@ class Homeworks extends Component {
     }
   }
   componentDidUpdate() {
-    if (!Object.keys(this.props.homeworks).length) {
-      this.props.getHomeworks();
+    const { homeworks, loading, getHomeworks } = this.props;
+    if (!Object.keys(homeworks).length && !loading) {
+      console.log(this.props);
+      getHomeworks();
     }
   }
   showContent = () => {

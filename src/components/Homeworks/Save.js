@@ -13,11 +13,14 @@ class Save extends Component {
       homeworks,
       changeUserId,
       changeTitle,
+      clean,
     } = this.props;
     if (userId && tar_id) {
       const homework = homeworks[userId][tar_id];
       changeUserId(homework.userId);
       changeTitle(homework.title);
+    } else {
+      clean();
     }
   }
   changeUserId = (event) => {

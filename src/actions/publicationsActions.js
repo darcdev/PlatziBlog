@@ -24,7 +24,6 @@ export const getPublications = () => async (dispatch) => {
       payload: response.data,
     });
   } catch (err) {
-    console.log('Error:', err.message);
     dispatch({
       type: ERROR,
       payload: 'Ha ocurrido un error , intentelo de nuevo',

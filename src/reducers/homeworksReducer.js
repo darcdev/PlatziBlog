@@ -6,6 +6,7 @@ import {
   CHANGE_TITLE,
   HOMEWORK_ADDED,
   UPDATE,
+  CLEAN,
 } from '../types/homeworksTypes';
 
 const INITIALSTATE = {
@@ -44,9 +45,11 @@ export default (state = INITIALSTATE, action) => {
         title: action.payload,
       };
     case HOMEWORK_ADDED:
-      return { state, homeworks: {}, loading: false, error: '', back: true };
+      return { ...state, homeworks: {}, loading: false, error: '', back: true };
     case UPDATE:
-      return { state, homeworks: action.payload };
+      return { ...state, homeworks: action.payload };
+    case CLEAN:
+      return { ...state, user_id: '', title: '' };
     default:
       return state;
   }

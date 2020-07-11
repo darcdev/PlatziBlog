@@ -7,6 +7,7 @@ import {
   CHANGE_TITLE,
   HOMEWORK_ADDED,
   UPDATE,
+  CLEAN,
 } from '../types/homeworksTypes';
 
 export const getHomeworks = () => async (dispatch) => {
@@ -33,7 +34,6 @@ export const getHomeworks = () => async (dispatch) => {
       payload: homeworks,
     });
   } catch (err) {
-    console.log('Error:', err.message);
     dispatch({
       type: ERROR,
       payload: 'Ha ocurrido un error , intentelo de nuevo',
@@ -63,7 +63,6 @@ export const addHomework = (newHomework) => async (dispatch) => {
       'https://jsonplaceholder.typicode.com/todos',
       newHomework
     );
-    console.log(response);
     dispatch({
       type: HOMEWORK_ADDED,
     });
@@ -83,7 +82,6 @@ export const edit = (editHomework) => async (dispatch) => {
       `https://jsonplaceholder.typicode.com/todos/${editHomework.id}`,
       editHomework
     );
-    console.log(response.data);
     dispatch({
       type: HOMEWORK_ADDED,
     });
@@ -133,4 +131,9 @@ export const remove = (tar_id) => async (dispatch, getState) => {
       payload: 'servicio no disponible',
     });
   }
+};
+export const clean = () => (dispatch) => {
+  dispatch({
+    type: CLEAN,
+  });
 };

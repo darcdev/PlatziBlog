@@ -5,3 +5,4 @@ export const CHANGE_USER_ID = 'CHANGE_USER_ID';
 export const CHANGE_TITLE = 'CHANGE_TITLE';
 export const HOMEWORK_ADDED = 'HOMEWORK_ADDED';
 export const UPDATE = 'HOMEWORK_UPDATE';
+export const CLEAN = 'CLEAN';
