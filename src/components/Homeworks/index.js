@@ -6,7 +6,9 @@ import Fatal from '../General/Fatal';
 import * as homeworksActions from '../../actions/homeworksActions';
 class Homeworks extends Component {
   componentDidMount() {
-    console.log(this.props.getHomeworks());
+    if (!Object.keys(this.props.homeworks).length) {
+      this.props.getHomeworks();
+    }
   }
   showContent = () => {
     const { homeworks, loading, error } = this.props;

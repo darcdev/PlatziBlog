@@ -3,3 +3,4 @@ export const LOADING = 'HOMEWORKS_LOADING';
 export const ERROR = 'HOMEWORKS_ERROR';
 export const CHANGE_USER_ID = 'CHANGE_USER_ID';
 export const CHANGE_TITLE = 'CHANGE_TITLE';
+export const HOMEWORK_ADDED = 'HOMEWORK_ADDED';

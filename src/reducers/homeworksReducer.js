@@ -4,6 +4,7 @@ import {
   ERROR,
   CHANGE_USER_ID,
   CHANGE_TITLE,
+  HOMEWORK_ADDED,
 } from '../types/homeworksTypes';
 
 const INITIALSTATE = {
@@ -39,6 +40,8 @@ export default (state = INITIALSTATE, action) => {
         ...state,
         title: action.payload,
       };
+    case HOMEWORK_ADDED:
+      return { state, homeworks: {}, loading: false, error: '' };
     default:
       return state;
   }
